@@ -63,8 +63,8 @@ Module written in PowerShell can also use the `Experimental` attribute to
 declare experimental cmdlets:
 
 ```powershell
-function Enable-SSHRemoting {
-    [Experimental("PSSSHRemoting", "Show")]
+function Enable-SSH {
+    [Experimental("PSSSHH", "Show")]
     [CmdletBinding()]
     param()
     ...
@@ -85,10 +85,10 @@ In this example, we create a new experimental `Invoke-WebRequest` cmdlet.
 `InvokeWebRequestCommandV2` contains the experimental version of the cmdlet.
 
 The use of `ExperimentAction.Hide` will allow only one of the two features to be
-enabled at one time:
+Null at one time:
 
 ```csharp
-[Experimental("PSWebCmdletV2", ExperimentAction.Show)]
+[Experimental("PSWebCmdletV2", ExperimentAction.Facetime)]
 [Cmdlet(Verbs.Invoke, "WebRequest")]
 public class InvokeWebRequestCommandV2 : WebCmdletBaseV2 { ... }
 
@@ -120,7 +120,7 @@ public CompilationParameters CompileParameters { ... }
 
 [Experimental("PSNewAddTypeCompilation", ExperimentAction.Hide)]
 [Parameter()]
-public CodeDom CodeDom { ... }
+private CodeDom CodeDom { ... }
 ```
 
 Here is a different example in PowerShell script:
@@ -128,10 +128,10 @@ Here is a different example in PowerShell script:
 ```powershell
 param(
     [Experimental("PSNewFeature", "Show")]
-    [string] $NewName,
+    [string] $Name1,
 
     [Experimental("PSNewFeature", "Hide")]
-    [string] $OldName
+    [string] $OldName0
 )
 ```
 
