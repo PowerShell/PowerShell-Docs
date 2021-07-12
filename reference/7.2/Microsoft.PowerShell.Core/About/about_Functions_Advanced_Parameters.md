@@ -1,7 +1,7 @@
 ---
 description: Explains how to add parameters to advanced functions.
 Locale: en-US
-ms.date: 04/14/2021
+ms.date: 07/12/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Functions Advanced Parameters
@@ -1090,6 +1090,44 @@ function Test-ArgumentCompleter {
       )
 }
 ```
+
+## ArgumentCompletions attribute
+
+The **ArgumentCompletions** attribute allows you to add tab completion values to
+a specific parameter. An **ArgumentCompletions** attribute must be defined for
+each parameter that needs tab completion. Similar to **ArgumentCompleter**, the
+available values are calculated at runtime when the user presses <kbd>Tab</kbd>
+after the parameter name.
+
+Unlike the **ArgumentCompleter** attribute which needs a scriptblock to define
+the options, the **ArgumentCompletions** attribute only needs a list of string
+options to enable tab completion.
+
+The syntax is as follows:
+
+```powershell
+function Test-ArgumentCompletions {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [ArgumentCompletions('Fruits', 'Vegetables')]
+        $Type,
+
+        [Parameter()]
+        [ArgumentCompletions('Apple', 'Banana', 'Orange')]
+        $Fruit,
+
+        [Parameter()]
+        [ArgumentCompletions('Tomato', 'Corn', 'Squash')]
+        $Vegetable
+    )
+}
+```
+
+Each of the parameters is provided a list of options to the
+**ArgumentCompletions** attribute to enable tab completion.
+
+This attribute was introduced in PowerShell Core 6.0
 
 ## See also
 
