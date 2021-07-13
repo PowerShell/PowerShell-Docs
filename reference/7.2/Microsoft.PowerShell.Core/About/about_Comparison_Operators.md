@@ -359,7 +359,7 @@ Scalar examples:
 ```
 
 If the input is a collection, the operators return the matching members of that
-collection and the `$Matches` automatic variable is `$null`.
+collection.
 
 Collection examples:
 
@@ -377,12 +377,12 @@ Collection examples:
 #Output: Bag, Beg
 ```
 
-`-match` and `-notmatch` support regex capture groups. Each time they run, they
-overwrite the `$Matches` automatic variable. When `<input>` is a collection the
-`$Matches` variable is `$null`. `$Matches` is a **Hashtable** that always has a
-key named '0', which stores the entire match. If the regular expression
-contains capture groups, the `$Matches` contains additional keys for each
-group.
+`-match` and `-notmatch` support regex capture groups. Each time they run on
+scalar input, and the `-match` result is **True**, or the `-notmatch` result is
+**False**, they overwrite the `$Matches` automatic variable. `$Matches` is a
+**Hashtable** that always has a key named '0', which stores the entire match.
+If the regular expression contains capture groups, the `$Matches` contains
+additional keys for each group.
 
 Example:
 
@@ -413,6 +413,21 @@ CONTOSO
 
 User name:
 jsmith
+```
+
+When the `-match` result is **False**, or the `-notmatch` result is **True**,
+or when the input is a collection, the `$Matches` automatic variable is not
+overwritten. Consequently, it will contain the previously set value, or `$null`
+if the variable has not been set. When referencing `$Matches` after invoking
+one of these operators, consider verifying that the variable was set by the
+current operator invocation by using a condition statement.
+
+Example:
+
+```powershell
+if ("<version>1.0.0</version>" -match '<version>(.*?)</version>') {
+    $Matches
+}
 ```
 
 For details, see [about_Regular_Expressions](about_Regular_Expressions.md) and
