@@ -1,7 +1,7 @@
 ---
 description: Describes the parameters that can be used with any cmdlet.
 Locale: en-US
-ms.date: 05/17/2021
+ms.date: 07/13/2021
 no-loc: [Debug, Verbose, Confirm]
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_commonparameters?view=powershell-7.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -50,8 +50,9 @@ parentheses.
 The **Action** parameters are **ActionPreference** type values.
 **ActionPreference** is an enumeration with the following values:
 
-| Name             | Value |
-|------------------|-------|
+|        Name        | Value |
+| ------------------ | ----- |
+| `Break`            | 6     |
 | `Suspend`          | 5     |
 | `Ignore`           | 4     |
 | `Inquire`          | 3     |
@@ -114,7 +115,7 @@ such as those from the `Write-Error` cmdlet.
 ```yaml
 Type: ActionPreference
 Aliases: ea
-Accepted values: Suspend, Ignore, Inquire, Continue, Stop, SilentlyContinue
+Accepted values: Break, Suspend, Ignore, Inquire, Continue, Stop, SilentlyContinue
 
 Required: False
 Position: Named
@@ -132,7 +133,10 @@ The **ErrorAction** parameter has no effect on terminating errors (such as
 missing data, parameters that aren't valid, or insufficient permissions) that
 prevent a command from completing successfully.
 
-`-ErrorAction:Continue` display the error message and continues executing the
+`-ErrorAction:Break` Enters the debugger when an error occurs or an exception
+is raised.
+
+`-ErrorAction:Continue` displays the error message and continues executing the
 command. `Continue` is the default.
 
 `-ErrorAction:Ignore` suppresses the error message and continues executing the
@@ -220,7 +224,7 @@ value of the **InformationAction** parameter. For more information about
 ```yaml
 Type: ActionPreference
 Aliases: ia
-Accepted values: Suspend, Ignore, Inquire, Continue, Stop, SilentlyContinue
+Accepted values: Break, Suspend, Ignore, Inquire, Continue, Stop, SilentlyContinue
 
 Required: False
 Position: Named
@@ -228,6 +232,9 @@ Default value: Depends on preference variable
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+`-InformationAction:Break` Enters the debugger at an occurrence of the
+`Write-Information` command.
 
 `-InformationAction:Stop` stops a command or script at an occurrence of the
 `Write-Information` command.
@@ -463,7 +470,7 @@ warning message. For example, this parameter works when a command contains the
 ```yaml
 Type: ActionPreference
 Aliases: wa
-Accepted values: Suspend, Ignore, Inquire, Continue, Stop, SilentlyContinue
+Accepted values: Break, Suspend, Ignore, Inquire, Continue, Stop, SilentlyContinue
 
 Required: False
 Position: Named
@@ -477,6 +484,8 @@ The **WarningAction** parameter overrides the value of the
 value of the `$WarningPreference` variable is **Continue**, warnings are
 displayed and execution continues unless you use the **WarningAction**
 parameter.
+
+`-WarningAction:Break` enters the debugger when a warning occurs.
 
 `-WarningAction:Continue` displays the warning messages and continues executing
 the command. `Continue` is the default.
