@@ -82,13 +82,6 @@ The following syntaxes are supported for multiple assignment operations in the
 **Repeat** statement:
 
 ```powershell
-# Comma separated assignment expressions.
-for (($i = 0), ($j = 0); $i -lt 10; $i++)
-{
-    "`$i:$i"
-    "`$j:$j"
-}
-
 # Comma separated assignment expressions enclosed in parenthesis.
 for (($i = 0), ($j = 0); $i -lt 10; ($i++), ($j++))
 {
